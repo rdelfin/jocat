@@ -21,11 +21,19 @@ pub struct PlayerPrefab {
 }
 
 pub fn load_player(world: &mut World, progress_counter: &mut ProgressCounter) {
-    load_player_prefab(world, "prefabs/player.ron", progress_counter);
+    let prefab = world.exec(|loader: PrefabLoader<'_, PlayerPrefab>| {
+        loader.load("prefabs/player.ron", RonFormat, progress_counter)
+    });
+    world.create_entity().with(prefab).build();
+    // load_player_prefab(world, "prefabs/player.ron", progress_counter);
 }
 
 pub fn load_jocrap(world: &mut World, progress_counter: &mut ProgressCounter) {
-    load_player_prefab(world, "prefabs/jocrap.ron", progress_counter);
+    let prefab = world.exec(|loader: PrefabLoader<'_, PlayerPrefab>| {
+        loader.load("prefabs/jocrap.ron", RonFormat, progress_counter)
+    });
+    world.create_entity().with(prefab).build();
+    // load_player_prefab(world, "prefabs/jocrap.ron", progress_counter);
 }
 
 fn load_player_prefab(

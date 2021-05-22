@@ -1,8 +1,7 @@
 #![enable(implicit_some)]
-
 Prefab(
     entities: [
-        // JoCrap
+        // Grey arrow
         PrefabEntity(
             data: PlayerPrefab(
                 // SpriteScenePrefab
@@ -30,7 +29,7 @@ Prefab(
                             ),
                         )),
                         sprites: [
-                            // JoCrap sprites (idle)
+                            // arrow sprites
                             List((
                                 texture_width: 6765,
                                 texture_height: 1542,
@@ -68,22 +67,24 @@ Prefab(
                                 ],
                             )),
                         ],
-                        name: "jocrap_full",
+                        // optional
+                        name: "jocrap",
                     ),
                     // SpriteRenderPrefab
                     render: (
-                        sheet: "jocrap_full",
+                        sheet: "jocrap",
                         sprite_number: 0,
                     ),
                     // Transform
                     transform: (
-                        translation: (-544.5, -55.5, 0.0),
+                        translation: (-544.5, -55.5, 0.5),
                     ),
                 ),
                 // AnimationSetPrefab
                 animation_set: (
                     animations: [
                         (
+                            // AnimationId
                             JoCrapBop,
                             (
                                 samplers: [
@@ -91,6 +92,7 @@ Prefab(
                                         0,
                                         SpriteIndex,
                                         (
+                                            // Time of key frames
                                             input: [
                                                 0.00, 0.03, 0.07, 0.10, 0.13,
                                                 0.16, 0.20, 0.23, 0.26, 0.30,
@@ -114,8 +116,7 @@ Prefab(
                         ),
                     ],
                 ),
-                player: None,
             ),
         ),
-    ]
+    ],
 )
