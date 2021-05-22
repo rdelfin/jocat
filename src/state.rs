@@ -1,4 +1,4 @@
-use crate::{animation::AnimationId, audio, prefabs};
+use crate::{animation::AnimationId, audio, components::Player, prefabs};
 use amethyst::{
     animation::{
         get_animation_set, AnimationCommand, AnimationControlSet, AnimationSet, EndControl,
@@ -12,6 +12,7 @@ use amethyst::{
     window::ScreenDimensions,
     GameData, SimpleState, SimpleTrans, StateData, Trans,
 };
+use log::info;
 
 #[derive(Default)]
 pub struct Game {
@@ -25,6 +26,7 @@ impl SimpleState for Game {
         self.progress_counter = Some(Default::default());
         prefabs::load_background(&mut world, self.progress_counter.as_mut().unwrap());
         prefabs::load_player(&mut world, self.progress_counter.as_mut().unwrap());
+        prefabs::load_jocrap(&mut world, self.progress_counter.as_mut().unwrap());
         // Creates a new camera
         initialise_camera(&mut world);
         audio::initialise_audio(&mut world);
@@ -36,7 +38,7 @@ impl SimpleState for Game {
         if let Some(ref progress_counter) = self.progress_counter {
             // Checks progress
             if progress_counter.is_complete() {
-                println!("LOADED");
+                info!("LOADED");
                 let StateData { world, .. } = data;
                 // Start the music
                 world.exec(
@@ -51,22 +53,41 @@ impl SimpleState for Game {
 
                 // Execute a pass similar to a system
                 world.exec(
-                    |(entities, animation_sets, mut control_sets): (
+                    |(entities, animation_sets, players, mut control_sets): (
                         Entities,
                         ReadStorage<AnimationSet<AnimationId, SpriteRender>>,
+                        ReadStorage<Player>,
                         WriteStorage<AnimationControlSet<AnimationId, SpriteRender>>,
                     )| {
                         // For each entity that has AnimationSet
-                        for (entity, animation_set) in (&entities, &animation_sets).join() {
+                        for (entity, animation_set, player) in
+                            (&entities, &animation_sets, (&players).maybe()).join()
+                        {
                             // Creates a new AnimationControlSet for the entity
                             let control_set = get_animation_set(&mut control_sets, entity).unwrap();
-                            control_set.add_animation(
-                                AnimationId::Attack,
-                                &animation_set.get(&AnimationId::Attack).unwrap(),
-                                EndControl::Loop(None),
-                                1.0,
-                                AnimationCommand::Start,
-                            );
+
+                            match player {
+                                Some(_) => {
+                                    info!("Setting animation to idle");
+                                    control_set.add_animation(
+                                        AnimationId::Idle,
+                                        &animation_set.get(&AnimationId::Idle).unwrap(),
+                                        EndControl::Loop(None),
+                                        1.0,
+                                        AnimationCommand::Start,
+                                    );
+                                }
+                                None => {
+                                    info!("Setting animation to bop");
+                                    control_set.add_animation(
+                                        AnimationId::JoCrapBop,
+                                        &animation_set.get(&AnimationId::JoCrapBop).unwrap(),
+                                        EndControl::Loop(None),
+                                        1.0,
+                                        AnimationCommand::Start,
+                                    );
+                                }
+                            }
                         }
                     },
                 );

@@ -15,6 +15,7 @@ use amethyst::{
 
 mod animation;
 mod audio;
+mod components;
 mod prefabs;
 mod state;
 

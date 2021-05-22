@@ -1,4 +1,4 @@
-use crate::animation::AnimationId;
+use crate::{animation::AnimationId, components::Player};
 use amethyst::{
     animation::AnimationSetPrefab,
     assets::{PrefabData, PrefabLoader, ProgressCounter, RonFormat},
@@ -17,11 +17,24 @@ pub struct PlayerPrefab {
     sprite_scene: SpriteScenePrefab,
     /// Аll animations that can be run on the entity
     animation_set: AnimationSetPrefab<AnimationId, SpriteRender>,
+    player: Option<Player>,
 }
 
 pub fn load_player(world: &mut World, progress_counter: &mut ProgressCounter) {
+    load_player_prefab(world, "prefabs/player.ron", progress_counter);
+}
+
+pub fn load_jocrap(world: &mut World, progress_counter: &mut ProgressCounter) {
+    load_player_prefab(world, "prefabs/jocrap.ron", progress_counter);
+}
+
+fn load_player_prefab(
+    world: &mut World,
+    prefab_location: &str,
+    progress_counter: &mut ProgressCounter,
+) {
     let prefab = world.exec(|loader: PrefabLoader<'_, PlayerPrefab>| {
-        loader.load("prefabs/player.ron", RonFormat, progress_counter)
+        loader.load(prefab_location, RonFormat, progress_counter)
     });
     world.create_entity().with(prefab).build();
 }

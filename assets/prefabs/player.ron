@@ -7,7 +7,7 @@
 
 Prefab(
     entities: [
-        // Grey bat
+        // JoCat
         PrefabEntity(
             data: PlayerPrefab(
                 // SpriteScenePrefab
@@ -36,13 +36,6 @@ Prefab(
                         )),
                         sprites: [
                             // Jocat sprites (idle)
-                            Grid((
-                                texture_width: 13515,
-                                texture_height: 2324,
-                                columns: 15,
-                                rows: 4,
-                                cell_size: (901, 581),
-                            )),
                             List((
                                 texture_width: 13515,
                                 texture_height: 2324,
@@ -113,12 +106,11 @@ Prefab(
                                 ],
                             )),
                         ],
-                        // optional
-                        name: "jocat_idle",
+                        name: "jocat_full",
                     ),
                     // SpriteRenderPrefab
                     render: (
-                        sheet: "jocat_idle",
+                        sheet: "jocat_full",
                         sprite_number: 0,
                     ),
                     // Transform
@@ -204,8 +196,10 @@ Prefab(
                         ),
                     ],
                 ),
+                player: Player(dummy: false),
             ),
         ),
+
     ],
 )
 
