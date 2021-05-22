@@ -33,6 +33,7 @@ impl SimpleState for Game {
         if let Some(ref progress_counter) = self.progress_counter {
             // Checks progress
             if progress_counter.is_complete() {
+                println!("LOADED");
                 let StateData { world, .. } = data;
                 // Execute a pass similar to a system
                 world.exec(

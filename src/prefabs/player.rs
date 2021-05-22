@@ -21,7 +21,7 @@ pub struct PlayerPrefab {
 
 pub fn load_player(world: &mut World, progress_counter: &mut ProgressCounter) {
     let prefab = world.exec(|loader: PrefabLoader<'_, PlayerPrefab>| {
-        loader.load("prefab/player.ron", RonFormat, progress_counter)
+        loader.load("prefabs/player.ron", RonFormat, progress_counter)
     });
     world.create_entity().with(prefab).build();
 }
