@@ -27,8 +27,13 @@ fn main() -> amethyst::Result<()> {
 
     let game_data = GameDataBuilder::default()
         .with_system_desc(
-            PrefabLoaderSystemDesc::<prefabs::PlayerPrefab>::default(),
+            PrefabLoaderSystemDesc::<prefabs::BackgroundPrefab>::default(),
             "scene_loader",
+            &[],
+        )
+        .with_system_desc(
+            PrefabLoaderSystemDesc::<prefabs::PlayerPrefab>::default(),
+            "player_loader",
             &[],
         )
         .with_bundle(AudioBundle::default())?

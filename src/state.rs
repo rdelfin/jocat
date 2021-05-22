@@ -23,6 +23,7 @@ impl SimpleState for Game {
         let StateData { mut world, .. } = data;
         // Crates new progress counter
         self.progress_counter = Some(Default::default());
+        prefabs::load_background(&mut world, self.progress_counter.as_mut().unwrap());
         prefabs::load_player(&mut world, self.progress_counter.as_mut().unwrap());
         // Creates a new camera
         initialise_camera(&mut world);
@@ -60,8 +61,8 @@ impl SimpleState for Game {
                             // Creates a new AnimationControlSet for the entity
                             let control_set = get_animation_set(&mut control_sets, entity).unwrap();
                             control_set.add_animation(
-                                AnimationId::Idle,
-                                &animation_set.get(&AnimationId::Idle).unwrap(),
+                                AnimationId::Attack,
+                                &animation_set.get(&AnimationId::Attack).unwrap(),
                                 EndControl::Loop(None),
                                 1.0,
                                 AnimationCommand::Start,

@@ -123,7 +123,7 @@ Prefab(
                     ),
                     // Transform
                     transform: (
-                        translation: (150.0, 37.5, 0.0),
+                        translation: (490.5, -170.5, 0.0),
                     ),
                 ),
                 // AnimationSetPrefab

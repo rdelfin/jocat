@@ -34,7 +34,7 @@ pub fn initialise_audio(world: &mut World) {
 pub fn play_music(sounds: &Sounds, storage: &AssetStorage<Source>, output: Option<&Output>) {
     if let Some(ref output) = output.as_ref() {
         if let Some(sound) = storage.get(&sounds.music) {
-            output.play_once(sound, 1.0);
+            output.play_n_times(sound, 1.0, 20);
         }
     }
 }
