@@ -1,6 +1,7 @@
 use amethyst::{
     animation::AnimationBundle,
     assets::PrefabLoaderSystemDesc,
+    audio::AudioBundle,
     core::transform::TransformBundle,
     renderer::{
         plugins::{RenderFlat2D, RenderToWindow},
@@ -13,6 +14,7 @@ use amethyst::{
 };
 
 mod animation;
+mod audio;
 mod prefabs;
 mod state;
 
@@ -29,6 +31,7 @@ fn main() -> amethyst::Result<()> {
             "scene_loader",
             &[],
         )
+        .with_bundle(AudioBundle::default())?
         .with_bundle(
             AnimationBundle::<animation::AnimationId, SpriteRender>::new(
                 "sprite_animation_control",

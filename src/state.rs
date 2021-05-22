@@ -1,11 +1,12 @@
-use crate::{animation::AnimationId, prefabs};
+use crate::{animation::AnimationId, audio, prefabs};
 use amethyst::{
     animation::{
         get_animation_set, AnimationCommand, AnimationControlSet, AnimationSet, EndControl,
     },
-    assets::ProgressCounter,
+    assets::{AssetStorage, ProgressCounter},
+    audio::{output::Output, Source},
     core::transform::Transform,
-    ecs::{Entities, Join, ReadStorage, WriteStorage},
+    ecs::{Entities, Join, Read, ReadExpect, ReadStorage, WriteStorage},
     prelude::{Builder, World, WorldExt},
     renderer::{camera::Camera, sprite::SpriteRender},
     window::ScreenDimensions,
@@ -25,6 +26,7 @@ impl SimpleState for Game {
         prefabs::load_player(&mut world, self.progress_counter.as_mut().unwrap());
         // Creates a new camera
         initialise_camera(&mut world);
+        audio::initialise_audio(&mut world);
     }
 
     fn update(&mut self, data: &mut StateData<'_, GameData<'_, '_>>) -> SimpleTrans {
@@ -35,6 +37,17 @@ impl SimpleState for Game {
             if progress_counter.is_complete() {
                 println!("LOADED");
                 let StateData { world, .. } = data;
+                // Start the music
+                world.exec(
+                    |(sounds, storage, audio_output): (
+                        ReadExpect<'_, audio::Sounds>,
+                        Read<'_, AssetStorage<Source>>,
+                        Option<Read<'_, Output>>,
+                    )| {
+                        audio::play_music(&*sounds, &storage, audio_output.as_deref())
+                    },
+                );
+
                 // Execute a pass similar to a system
                 world.exec(
                     |(entities, animation_sets, mut control_sets): (
@@ -47,8 +60,8 @@ impl SimpleState for Game {
                             // Creates a new AnimationControlSet for the entity
                             let control_set = get_animation_set(&mut control_sets, entity).unwrap();
                             control_set.add_animation(
-                                AnimationId::Attack,
-                                &animation_set.get(&AnimationId::Attack).unwrap(),
+                                AnimationId::Idle,
+                                &animation_set.get(&AnimationId::Idle).unwrap(),
                                 EndControl::Loop(None),
                                 1.0,
                                 AnimationCommand::Start,
