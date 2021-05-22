@@ -20,8 +20,8 @@ fn main() -> amethyst::Result<()> {
     amethyst::start_logger(Default::default());
 
     let app_root = application_root_dir()?;
-    let assets_dir = app_root.join("examples/sprite_animation/assets/");
-    let display_config_path = app_root.join("examples/sprite_animation/config/display.ron");
+    let assets_dir = app_root.join("assets");
+    let display_config_path = app_root.join("config").join("display.ron");
 
     let game_data = GameDataBuilder::default()
         .with_system_desc(
