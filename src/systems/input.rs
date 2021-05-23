@@ -4,7 +4,7 @@ use crate::{
     input::{ActionBinding, GameBindingTypes},
 };
 use amethyst::{
-    animation::{get_animation_set, AnimationControlSet, ControlState},
+    animation::{get_animation_set, AnimationControlSet},
     derive::SystemDesc,
     ecs::{prelude::*, Entities, Join, Read, ReadStorage, System, WriteStorage},
     input::InputHandler,
