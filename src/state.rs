@@ -72,6 +72,13 @@ impl SimpleState for Game {
                                     control_set.add_animation(
                                         AnimationId::Attack,
                                         &animation_set.get(&AnimationId::Attack).unwrap(),
+                                        EndControl::Stay,
+                                        1.0,
+                                        AnimationCommand::Init,
+                                    );
+                                    control_set.add_animation(
+                                        AnimationId::Idle,
+                                        &animation_set.get(&AnimationId::Idle).unwrap(),
                                         EndControl::Loop(None),
                                         1.0,
                                         AnimationCommand::Start,

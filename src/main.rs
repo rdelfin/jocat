@@ -20,6 +20,7 @@ mod components;
 mod input;
 mod prefabs;
 mod state;
+mod systems;
 
 fn main() -> amethyst::Result<()> {
     amethyst::start_logger(Default::default());
@@ -61,7 +62,12 @@ fn main() -> amethyst::Result<()> {
                         .with_clear([0.34, 0.36, 0.52, 1.0]),
                 )
                 .with_plugin(RenderFlat2D::default()),
-        )?;
+        )?
+        .with(
+            systems::UserInputSystem::default(),
+            "user_input_system",
+            &[],
+        );
 
     let mut game = Application::new(assets_dir, state::Game::default(), game_data)?;
     game.run();
