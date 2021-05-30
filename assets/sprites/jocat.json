@@ -1,0 +1,189 @@
+{ "frames": {
+   "jocat_idle_orig 0.ase": {
+    "frame": { "x": 7680, "y": 1080, "w": 1920, "h": 1080 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1920, "h": 1080 },
+    "sourceSize": { "w": 1920, "h": 1080 },
+    "duration": 67
+   },
+   "jocat_idle_orig 1.ase": {
+    "frame": { "x": 3840, "y": 3240, "w": 1920, "h": 1080 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1920, "h": 1080 },
+    "sourceSize": { "w": 1920, "h": 1080 },
+    "duration": 100
+   },
+   "jocat_idle_orig 2.ase": {
+    "frame": { "x": 1920, "y": 3240, "w": 1920, "h": 1080 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1920, "h": 1080 },
+    "sourceSize": { "w": 1920, "h": 1080 },
+    "duration": 33
+   },
+   "jocat_idle_orig 3.ase": {
+    "frame": { "x": 0, "y": 3240, "w": 1920, "h": 1080 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1920, "h": 1080 },
+    "sourceSize": { "w": 1920, "h": 1080 },
+    "duration": 133
+   },
+   "jocat_idle_orig 4.ase": {
+    "frame": { "x": 7680, "y": 2160, "w": 1920, "h": 1080 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1920, "h": 1080 },
+    "sourceSize": { "w": 1920, "h": 1080 },
+    "duration": 133
+   },
+   "jocat_idle_orig 5.ase": {
+    "frame": { "x": 5760, "y": 2160, "w": 1920, "h": 1080 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1920, "h": 1080 },
+    "sourceSize": { "w": 1920, "h": 1080 },
+    "duration": 33
+   },
+   "jocat_idle_orig 6.ase": {
+    "frame": { "x": 3840, "y": 2160, "w": 1920, "h": 1080 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1920, "h": 1080 },
+    "sourceSize": { "w": 1920, "h": 1080 },
+    "duration": 133
+   },
+   "jocat_idle_orig 7.ase": {
+    "frame": { "x": 1920, "y": 2160, "w": 1920, "h": 1080 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1920, "h": 1080 },
+    "sourceSize": { "w": 1920, "h": 1080 },
+    "duration": 100
+   },
+   "jocat_idle_orig 8.ase": {
+    "frame": { "x": 0, "y": 2160, "w": 1920, "h": 1080 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1920, "h": 1080 },
+    "sourceSize": { "w": 1920, "h": 1080 },
+    "duration": 100
+   },
+   "jocat_idle_orig 9.ase": {
+    "frame": { "x": 0, "y": 0, "w": 1920, "h": 1080 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1920, "h": 1080 },
+    "sourceSize": { "w": 1920, "h": 1080 },
+    "duration": 167
+   },
+   "jocat_idle_orig 10.ase": {
+    "frame": { "x": 0, "y": 0, "w": 1920, "h": 1080 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1920, "h": 1080 },
+    "sourceSize": { "w": 1920, "h": 1080 },
+    "duration": 33
+   },
+   "jocat_idle_orig 11.ase": {
+    "frame": { "x": 5760, "y": 1080, "w": 1920, "h": 1080 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1920, "h": 1080 },
+    "sourceSize": { "w": 1920, "h": 1080 },
+    "duration": 133
+   },
+   "jocat_idle_orig 12.ase": {
+    "frame": { "x": 3840, "y": 1080, "w": 1920, "h": 1080 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1920, "h": 1080 },
+    "sourceSize": { "w": 1920, "h": 1080 },
+    "duration": 167
+   },
+   "jocat_idle_orig 13.ase": {
+    "frame": { "x": 1920, "y": 1080, "w": 1920, "h": 1080 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1920, "h": 1080 },
+    "sourceSize": { "w": 1920, "h": 1080 },
+    "duration": 133
+   },
+   "jocat_idle_orig 14.ase": {
+    "frame": { "x": 0, "y": 1080, "w": 1920, "h": 1080 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1920, "h": 1080 },
+    "sourceSize": { "w": 1920, "h": 1080 },
+    "duration": 67
+   },
+   "jocat_idle_orig 15.ase": {
+    "frame": { "x": 7680, "y": 0, "w": 1920, "h": 1080 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1920, "h": 1080 },
+    "sourceSize": { "w": 1920, "h": 1080 },
+    "duration": 133
+   },
+   "jocat_idle_orig 16.ase": {
+    "frame": { "x": 5760, "y": 0, "w": 1920, "h": 1080 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1920, "h": 1080 },
+    "sourceSize": { "w": 1920, "h": 1080 },
+    "duration": 67
+   },
+   "jocat_idle_orig 17.ase": {
+    "frame": { "x": 3840, "y": 0, "w": 1920, "h": 1080 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1920, "h": 1080 },
+    "sourceSize": { "w": 1920, "h": 1080 },
+    "duration": 100
+   },
+   "jocat_idle_orig 18.ase": {
+    "frame": { "x": 1920, "y": 0, "w": 1920, "h": 1080 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1920, "h": 1080 },
+    "sourceSize": { "w": 1920, "h": 1080 },
+    "duration": 100
+   },
+   "jocat_idle_orig 19.ase": {
+    "frame": { "x": 5760, "y": 2160, "w": 1920, "h": 1080 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1920, "h": 1080 },
+    "sourceSize": { "w": 1920, "h": 1080 },
+    "duration": 67
+   },
+   "jocat_idle_orig 20.ase": {
+    "frame": { "x": 7680, "y": 1080, "w": 1920, "h": 1080 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1920, "h": 1080 },
+    "sourceSize": { "w": 1920, "h": 1080 },
+    "duration": 33
+   }
+ },
+ "meta": {
+  "app": "http://www.aseprite.org/",
+  "version": "1.2.21-x64",
+  "image": "jocat_idle_orig.png",
+  "format": "RGBA8888",
+  "size": { "w": 9600, "h": 4320 },
+  "scale": "1",
+  "frameTags": [
+   { "name": "Idle", "from": 0, "to": 5, "direction": "forward" },
+   { "name": "AttackPrepare", "from": 6, "to": 9, "direction": "forward" },
+   { "name": "Attack", "from": 10, "to": 20, "direction": "forward" }
+  ],
+  "layers": [
+   { "name": "Layer 1", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+  ]
+ }
+}

@@ -1,0 +1,83 @@
+{ "frames": {
+   "jocrap_bop_orig 0.ase": {
+    "frame": { "x": 0, "y": 0, "w": 1920, "h": 1080 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1920, "h": 1080 },
+    "sourceSize": { "w": 1920, "h": 1080 },
+    "duration": 167
+   },
+   "jocrap_bop_orig 1.ase": {
+    "frame": { "x": 1920, "y": 0, "w": 1920, "h": 1080 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1920, "h": 1080 },
+    "sourceSize": { "w": 1920, "h": 1080 },
+    "duration": 133
+   },
+   "jocrap_bop_orig 2.ase": {
+    "frame": { "x": 3840, "y": 0, "w": 1920, "h": 1080 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1920, "h": 1080 },
+    "sourceSize": { "w": 1920, "h": 1080 },
+    "duration": 100
+   },
+   "jocrap_bop_orig 3.ase": {
+    "frame": { "x": 0, "y": 1080, "w": 1920, "h": 1080 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1920, "h": 1080 },
+    "sourceSize": { "w": 1920, "h": 1080 },
+    "duration": 100
+   },
+   "jocrap_bop_orig 4.ase": {
+    "frame": { "x": 1920, "y": 1080, "w": 1920, "h": 1080 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1920, "h": 1080 },
+    "sourceSize": { "w": 1920, "h": 1080 },
+    "duration": 133
+   },
+   "jocrap_bop_orig 5.ase": {
+    "frame": { "x": 3840, "y": 1080, "w": 1920, "h": 1080 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1920, "h": 1080 },
+    "sourceSize": { "w": 1920, "h": 1080 },
+    "duration": 133
+   },
+   "jocrap_bop_orig 6.ase": {
+    "frame": { "x": 0, "y": 2160, "w": 1920, "h": 1080 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1920, "h": 1080 },
+    "sourceSize": { "w": 1920, "h": 1080 },
+    "duration": 100
+   },
+   "jocrap_bop_orig 7.ase": {
+    "frame": { "x": 1920, "y": 2160, "w": 1920, "h": 1080 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 1920, "h": 1080 },
+    "sourceSize": { "w": 1920, "h": 1080 },
+    "duration": 133
+   }
+ },
+ "meta": {
+  "app": "http://www.aseprite.org/",
+  "version": "1.2.21-x64",
+  "image": "jocrap_bop_orig.png",
+  "format": "RGBA8888",
+  "size": { "w": 5760, "h": 3240 },
+  "scale": "1",
+  "frameTags": [
+  ],
+  "layers": [
+   { "name": "Body", "opacity": 255, "blendMode": "normal" },
+   { "name": "Head", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+  ]
+ }
+}
