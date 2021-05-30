@@ -19,6 +19,7 @@ mod audio;
 mod components;
 mod input;
 mod prefabs;
+mod resources;
 mod state;
 mod systems;
 

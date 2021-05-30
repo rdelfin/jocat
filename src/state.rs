@@ -1,4 +1,4 @@
-use crate::{animation::AnimationId, audio, components::Player, prefabs};
+use crate::{animation::AnimationId, audio, components::Player, prefabs, resources::Level};
 use amethyst::{
     animation::{
         get_animation_set, AnimationCommand, AnimationControlSet, AnimationSet, EndControl,
@@ -10,10 +10,12 @@ use amethyst::{
     input::{is_close_requested, is_key_down, VirtualKeyCode},
     prelude::{Builder, World, WorldExt},
     renderer::{camera::Camera, sprite::SpriteRender},
+    utils::application_root_dir,
     window::ScreenDimensions,
     GameData, SimpleState, SimpleTrans, StateData, StateEvent, Trans,
 };
 use log::info;
+use std::fs;
 
 #[derive(Default)]
 pub struct Game {
@@ -23,6 +25,8 @@ pub struct Game {
 impl SimpleState for Game {
     fn on_start(&mut self, data: StateData<'_, GameData<'_, '_>>) {
         let StateData { mut world, .. } = data;
+        // Load level data
+        load_level(&mut world);
         // Crates new progress counter
         self.progress_counter = Some(Default::default());
         prefabs::load_jocrap(&mut world, self.progress_counter.as_mut().unwrap());
@@ -134,4 +138,12 @@ fn initialise_camera(world: &mut World) {
         .with(camera_transform)
         .with(Camera::standard_2d(width, height))
         .build();
+}
+
+fn load_level(world: &mut World) -> anyhow::Result<()> {
+    let level_file = application_root_dir()?.join("assets").join("level.json");
+    let l: Level = serde_json::from_str(&fs::read_to_string(level_file)?)?;
+    world.insert(l);
+
+    Ok(())
 }

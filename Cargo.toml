@@ -8,6 +8,8 @@ edition = "2018"
 
 [dependencies]
 amethyst = { version = "0.15.3", features = ["vulkan", "no-slow-safety-checks"] }
+anyhow = "1.0"
 log = "0.4.14"
 nalgebra = "0.19.0"
 serde = "1.0"
+serde_json = "1.0.64"
