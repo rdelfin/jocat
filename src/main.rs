@@ -64,6 +64,7 @@ fn main() -> amethyst::Result<()> {
                 )
                 .with_plugin(RenderFlat2D::default()),
         )?
+        .with(systems::TimingSystem::default(), "timing_system", &[])
         .with(
             systems::UserInputSystem::default(),
             "user_input_system",

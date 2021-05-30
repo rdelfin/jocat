@@ -1,4 +1,10 @@
-use crate::{animation::AnimationId, audio, components::Player, prefabs, resources::Level};
+use crate::{
+    animation::AnimationId,
+    audio,
+    components::Player,
+    prefabs,
+    resources::{Level, LevelStart},
+};
 use amethyst::{
     animation::{
         get_animation_set, AnimationCommand, AnimationControlSet, AnimationSet, EndControl,
@@ -15,7 +21,7 @@ use amethyst::{
     GameData, SimpleState, SimpleTrans, StateData, StateEvent, Trans,
 };
 use log::info;
-use std::fs;
+use std::{fs, time::Instant};
 
 #[derive(Default)]
 pub struct Game {
@@ -26,7 +32,7 @@ impl SimpleState for Game {
     fn on_start(&mut self, data: StateData<'_, GameData<'_, '_>>) {
         let StateData { mut world, .. } = data;
         // Load level data
-        load_level(&mut world);
+        load_level(&mut world).expect("Encountered an issue when loading the level");
         // Crates new progress counter
         self.progress_counter = Some(Default::default());
         prefabs::load_jocrap(&mut world, self.progress_counter.as_mut().unwrap());
@@ -68,6 +74,9 @@ impl SimpleState for Game {
                         audio::play_music(&*sounds, &storage, audio_output.as_deref())
                     },
                 );
+
+                // Start the timer
+                world.insert(LevelStart(Instant::now()));
 
                 // Execute a pass similar to a system
                 world.exec(

@@ -1,0 +1,25 @@
+{
+    "events": {
+        "6": {
+            "e": "ThrowSmall"
+        },
+        "10": {
+            "e": "ThrowSmall"
+        },
+        "14": {
+            "e": "ThrowSmall"
+        },
+        "18": {
+            "e": "ThrowSmall"
+        },
+        "22": {
+            "e": "ThrowSmall"
+        },
+        "26": {
+            "e": "ThrowSmall"
+        },
+        "30": {
+            "e": "ThrowSmall"
+        }
+    }
+}

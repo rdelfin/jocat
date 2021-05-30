@@ -4,7 +4,6 @@ use std::collections::BTreeMap;
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub enum GameEventType {
     ThrowSmall,
-    Attack,
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize)]

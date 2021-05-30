@@ -1,3 +1,7 @@
 mod level;
+mod timer;
 
-pub use level::{GameEvent, GameEventType, Level};
+pub use self::{
+    level::{GameEvent, GameEventType, Level},
+    timer::LevelStart,
+};
