@@ -7,10 +7,11 @@ use amethyst::{
     audio::{output::Output, Source},
     core::transform::Transform,
     ecs::{Entities, Join, Read, ReadExpect, ReadStorage, WriteStorage},
+    input::{is_close_requested, is_key_down, VirtualKeyCode},
     prelude::{Builder, World, WorldExt},
     renderer::{camera::Camera, sprite::SpriteRender},
     window::ScreenDimensions,
-    GameData, SimpleState, SimpleTrans, StateData, Trans,
+    GameData, SimpleState, SimpleTrans, StateData, StateEvent, Trans,
 };
 use log::info;
 
@@ -30,6 +31,19 @@ impl SimpleState for Game {
         // Creates a new camera
         initialise_camera(&mut world);
         audio::initialise_audio(&mut world);
+    }
+
+    fn handle_event(
+        &mut self,
+        mut _data: StateData<'_, GameData<'_, '_>>,
+        event: StateEvent,
+    ) -> SimpleTrans {
+        if let StateEvent::Window(event) = &event {
+            if is_close_requested(&event) || is_key_down(&event, VirtualKeyCode::Escape) {
+                return Trans::Quit;
+            }
+        }
+        Trans::None
     }
 
     fn update(&mut self, data: &mut StateData<'_, GameData<'_, '_>>) -> SimpleTrans {
