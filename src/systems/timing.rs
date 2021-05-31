@@ -1,6 +1,6 @@
 use crate::{
     audio,
-    resources::{GameEventType, Level, LevelStart},
+    resources::{GameEvent, Level, LevelStart},
 };
 use amethyst::{
     assets::AssetStorage,
@@ -52,10 +52,23 @@ impl TimingSystem {
         audio_output: Option<Read<'s, Output>>,
         level: ReadExpect<'s, Level>,
     ) {
-        if level.events.contains_key(&self.beat) {
-            match level.events[&self.beat].e {
-                GameEventType::ThrowSmall => {
-                    audio::play_throw(&*sounds, &storage, audio_output.as_deref());
+        // Iterate through all events in current beat
+        if let Some(events) = level.events.get(&self.beat) {
+            for event in events {
+                info!("Actioning event {:?}", event);
+                match event {
+                    GameEvent::ThrowStart { t: _ } => {
+                        audio::play_throw(&*sounds, &storage, audio_output.as_deref());
+                    }
+                    GameEvent::ThrowAnimationStart => {
+                        // Start throw animation
+                    }
+                    GameEvent::ThrowObject { t: _ } => {
+                        // Add the appropriate object
+                    }
+                    GameEvent::ThrowEnd => {
+                        // Reset thrower animation
+                    }
                 }
             }
         }

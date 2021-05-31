@@ -1,25 +1,11 @@
 {
     "events": {
-        "6": {
-            "e": "ThrowSmall"
-        },
-        "10": {
-            "e": "ThrowSmall"
-        },
-        "14": {
-            "e": "ThrowSmall"
-        },
-        "18": {
-            "e": "ThrowSmall"
-        },
-        "22": {
-            "e": "ThrowSmall"
-        },
-        "26": {
-            "e": "ThrowSmall"
-        },
-        "30": {
-            "e": "ThrowSmall"
-        }
+        "6": [{ "ThrowStart": { "t": "Watermelon" } }],
+        "10": [{ "ThrowStart": { "t": "Wheat" } }],
+        "14": [{ "ThrowStart": { "t": "Log" } }],
+        "18": [{ "ThrowStart": { "t": "Watermelon" } }],
+        "22": [{ "ThrowStart": { "t": "Wheat" } }],
+        "26": [{ "ThrowStart": { "t": "Log" } }],
+        "30": [{ "ThrowStart": { "t": "Watermelon" } }]
     }
 }

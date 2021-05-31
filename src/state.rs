@@ -164,7 +164,8 @@ fn initialise_camera(world: &mut World) {
 
 fn load_level(world: &mut World) -> anyhow::Result<()> {
     let level_file = application_root_dir()?.join("assets").join("level.json");
-    let l: Level = serde_json::from_str(&fs::read_to_string(level_file)?)?;
+    let mut l: Level = serde_json::from_str(&fs::read_to_string(level_file)?)?;
+    l.populate()?;
     world.insert(l);
 
     Ok(())
