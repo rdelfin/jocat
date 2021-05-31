@@ -26,6 +26,7 @@ use std::{fs, time::Instant};
 #[derive(Default)]
 pub struct Game {
     pub progress_counter: Option<ProgressCounter>,
+    pub items_done_last: Option<usize>,
 }
 
 impl SimpleState for Game {
@@ -127,6 +128,18 @@ impl SimpleState for Game {
                 );
                 // All data loaded
                 self.progress_counter = None;
+            } else {
+                let num_finished = progress_counter.num_finished();
+                let print = match self.items_done_last {
+                    Some(l) => num_finished != l,
+                    None => true,
+                };
+                if print {
+                    self.items_done_last = Some(num_finished);
+                    let completion_pct =
+                        100. * num_finished as f64 / progress_counter.num_assets() as f64;
+                    info!("{:.2}% DONE", completion_pct);
+                }
             }
         }
         Trans::None
