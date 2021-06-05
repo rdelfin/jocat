@@ -1,0 +1,61 @@
+#![enable(implicit_some)]
+Prefab(
+    entities: [
+        PrefabEntity(
+            data: ThrownPrefab(
+                // SpriteScenePrefab
+                sprite_scene: (
+                    // SpriteSheetPrefab with index 0
+                    sheet: Sheet(
+                        // TexturePrefab
+                        texture: File("sprites/watermelon.png", (
+                            "IMAGE", (
+                                sampler_info: (
+                                    min_filter: Nearest,
+                                    mag_filter: Nearest,
+                                    mip_filter: Nearest,
+                                    wrap_mode: (Tile, Tile, Tile),
+                                    lod_bias: (0),
+                                    lod_range: (
+                                        start: ( 0 ),
+                                        end: ( 8000 ),
+                                    ),
+                                    comparison: None,
+                                    border: (0),
+                                    normalized: true,
+                                    anisotropic: Off,
+                                ),
+                            ),
+                        )),
+                        sprites: [
+                            Grid((
+                                texture_width: 249,
+                                texture_height: 218,
+                                columns: 1,
+                                rows: 1,
+                                cell_size: (249, 218),
+                            )),
+                        ],
+                        // optional
+                        name: "throwable_watermelon",
+                    ),
+                    // SpriteRenderPrefab
+                    render: (
+                        sheet: "throwable_watermelon",
+                        sprite_number: 0,
+                    ),
+                    // Transform
+                    transform: (
+                        translation: (0.0, 0.0, 0.6),
+                    ),
+                ),
+                // FallingObject
+                falling_object: (
+                    g: 9.81,
+                    v: [0.0, 0.0],
+                ),
+            ),
+        ),
+    ],
+)
+

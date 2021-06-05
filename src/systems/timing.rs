@@ -1,7 +1,7 @@
 use crate::{
     audio,
-    prefabs::{ThrownPrefab, ThrownPrefabSet},
-    resources::{GameEvent, Level, LevelStart},
+    prefabs::ThrownPrefab,
+    resources::{GameEvent, Level, LevelStart, ThrownPrefabSet},
 };
 use amethyst::{
     assets::{AssetStorage, Handle, Prefab},
@@ -90,13 +90,14 @@ impl TimingSystem {
                     GameEvent::ThrowAnimationStart => {
                         // Start throw animation
                     }
-                    GameEvent::ThrowObject { t: _ } => {
-                        let throwable_prefab = throwable_prefab_set.0[0].clone();
+                    GameEvent::ThrowObject { t } => {
+                        let throwable_prefab = throwable_prefab_set
+                            .get_handle(*t)
+                            .expect("Throwable prefab set get_handle() failed");
                         entities
                             .build_entity()
                             .with(throwable_prefab, &mut prefabs)
                             .build();
-                        // Add the appropriate object
                     }
                     GameEvent::ThrowEnd => {
                         // Reset thrower animation
