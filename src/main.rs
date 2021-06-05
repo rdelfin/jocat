@@ -74,6 +74,11 @@ fn main() -> amethyst::Result<()> {
             systems::UserInputSystem::default(),
             "user_input_system",
             &[],
+        )
+        .with(
+            systems::PhysicsSystem,
+            "physics_system",
+            &["user_input_system", "timing_system"],
         );
 
     let mut game = Application::new(assets_dir, state::Game::default(), game_data)?;
