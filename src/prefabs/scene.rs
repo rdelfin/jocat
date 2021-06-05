@@ -1,5 +1,5 @@
 use amethyst::{
-    assets::{Handle, Prefab, PrefabData, PrefabLoader, ProgressCounter, RonFormat},
+    assets::{PrefabData, PrefabLoader, ProgressCounter, RonFormat},
     derive::PrefabData,
     ecs::prelude::Entity,
     error::Error,
