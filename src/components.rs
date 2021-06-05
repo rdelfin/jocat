@@ -20,6 +20,6 @@ pub struct Player {
 #[storage(DenseVecStorage)]
 #[serde(deny_unknown_fields)]
 pub struct FallingObject {
-    g: f64,
-    v: Vector2<f32>,
+    pub g: f64,
+    pub v: Vector2<f32>,
 }
