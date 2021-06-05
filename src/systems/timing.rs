@@ -1,9 +1,10 @@
 use crate::{
     audio,
+    prefabs::{BackgroundPrefab, ThrowablePrefabSet},
     resources::{GameEvent, Level, LevelStart},
 };
 use amethyst::{
-    assets::AssetStorage,
+    assets::{AssetStorage, Handle, Prefab},
     audio::{output::Output, Source},
     derive::SystemDesc,
     ecs::{prelude::*, Read, ReadExpect, System},
@@ -21,14 +22,29 @@ pub struct TimingSystem {
 
 impl<'s> System<'s> for TimingSystem {
     type SystemData = (
+        Entities<'s>,
         Read<'s, AssetStorage<Source>>,
         ReadExpect<'s, audio::Sounds>,
         Option<Read<'s, Output>>,
         Option<Read<'s, LevelStart>>,
         ReadExpect<'s, Level>,
+        WriteStorage<'s, Handle<Prefab<BackgroundPrefab>>>,
+        Read<'s, ThrowablePrefabSet>,
     );
 
-    fn run(&mut self, (storage, sounds, audio_output, level_start, level): Self::SystemData) {
+    fn run(
+        &mut self,
+        (
+            entities,
+            storage,
+            sounds,
+            audio_output,
+            level_start,
+            level,
+            prefabs,
+            throwable_prefab_set,
+        ): Self::SystemData,
+    ) {
         // Only run once we have an initialised level start
         if let Some(level_start) = level_start {
             let new_beat =
@@ -38,7 +54,15 @@ impl<'s> System<'s> for TimingSystem {
             if new_beat != self.beat {
                 info!("BEAT {}", new_beat);
                 self.beat = new_beat;
-                self.beat_act(storage, sounds, audio_output, level);
+                self.beat_act(
+                    storage,
+                    sounds,
+                    audio_output,
+                    level,
+                    entities,
+                    prefabs,
+                    throwable_prefab_set,
+                );
             }
         }
     }
@@ -51,6 +75,9 @@ impl TimingSystem {
         sounds: ReadExpect<'s, audio::Sounds>,
         audio_output: Option<Read<'s, Output>>,
         level: ReadExpect<'s, Level>,
+        entities: Entities<'s>,
+        mut prefabs: WriteStorage<'s, Handle<Prefab<BackgroundPrefab>>>,
+        throwable_prefab_set: Read<'s, ThrowablePrefabSet>,
     ) {
         // Iterate through all events in current beat
         if let Some(events) = level.events.get(&self.beat) {
@@ -64,6 +91,11 @@ impl TimingSystem {
                         // Start throw animation
                     }
                     GameEvent::ThrowObject { t: _ } => {
+                        let throwable_prefab = throwable_prefab_set.0[0].clone();
+                        entities
+                            .build_entity()
+                            .with(throwable_prefab, &mut prefabs)
+                            .build();
                         // Add the appropriate object
                     }
                     GameEvent::ThrowEnd => {

@@ -36,6 +36,7 @@ impl SimpleState for Game {
         load_level(&mut world).expect("Encountered an issue when loading the level");
         // Crates new progress counter
         self.progress_counter = Some(Default::default());
+        prefabs::load_throwable(&mut world, self.progress_counter.as_mut().unwrap());
         prefabs::load_jocrap(&mut world, self.progress_counter.as_mut().unwrap());
         prefabs::load_player(&mut world, self.progress_counter.as_mut().unwrap());
         prefabs::load_background(&mut world, self.progress_counter.as_mut().unwrap());
@@ -129,6 +130,11 @@ impl SimpleState for Game {
                 // All data loaded
                 self.progress_counter = None;
             } else {
+                let errors = progress_counter.errors();
+                if errors.len() != 0 {
+                    println!("ERRORS: {:?}", errors);
+                }
+
                 let num_finished = progress_counter.num_finished();
                 let print = match self.items_done_last {
                     Some(l) => num_finished != l,
@@ -138,7 +144,11 @@ impl SimpleState for Game {
                     self.items_done_last = Some(num_finished);
                     let completion_pct =
                         100. * num_finished as f64 / progress_counter.num_assets() as f64;
-                    info!("{:.2}% DONE", completion_pct);
+                    info!(
+                        "{:.2}% DONE ({} failed)",
+                        completion_pct,
+                        progress_counter.num_failed()
+                    );
                 }
             }
         }
