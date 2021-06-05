@@ -87,6 +87,7 @@ impl SimpleState for Game {
 
                 // Execute a pass similar to a system
                 world.exec(
+                    #[allow(clippy::type_complexity)]
                     |(entities, animation_sets, players, mut control_sets): (
                         Entities,
                         ReadStorage<AnimationSet<AnimationId, SpriteRender>>,
@@ -136,7 +137,7 @@ impl SimpleState for Game {
                 self.progress_counter = None;
             } else {
                 let errors = progress_counter.errors();
-                if errors.len() != 0 {
+                if !errors.is_empty() {
                     println!("ERRORS: {:?}", errors);
                 }
 

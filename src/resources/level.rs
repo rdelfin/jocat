@@ -72,7 +72,7 @@ impl Level {
 
     fn merge_events(&mut self, new_events: BTreeMap<u64, HashSet<GameEvent>>) {
         for (beat, beat_events) in new_events {
-            let old_events = self.events.entry(beat).or_insert(HashSet::new());
+            let old_events = self.events.entry(beat).or_insert_with(HashSet::new);
             // Alternatively, this could be an iterate + insert (more efficient)
             *old_events = old_events.union(&beat_events).cloned().collect();
         }
@@ -82,6 +82,6 @@ impl Level {
 fn add_event_to(events: &mut BTreeMap<u64, HashSet<GameEvent>>, new_event: GameEvent, beat: u64) {
     events
         .entry(beat)
-        .or_insert(HashSet::new())
+        .or_insert_with(HashSet::new)
         .insert(new_event);
 }

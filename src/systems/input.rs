@@ -19,6 +19,7 @@ pub struct UserInputSystem {
 }
 
 impl<'s> System<'s> for UserInputSystem {
+    #[allow(clippy::type_complexity)]
     type SystemData = (
         Entities<'s>,
         ReadStorage<'s, Player>,

@@ -21,6 +21,7 @@ pub struct TimingSystem {
 }
 
 impl<'s> System<'s> for TimingSystem {
+    #[allow(clippy::type_complexity)]
     type SystemData = (
         Entities<'s>,
         Read<'s, AssetStorage<Source>>,
@@ -69,6 +70,7 @@ impl<'s> System<'s> for TimingSystem {
 }
 
 impl TimingSystem {
+    #[allow(clippy::too_many_arguments)]
     fn beat_act<'s>(
         &mut self,
         storage: Read<'s, AssetStorage<Source>>,
