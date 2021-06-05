@@ -2,7 +2,7 @@
 Prefab(
     entities: [
         PrefabEntity(
-            data: BackgroundPrefab(
+            data: ThrownPrefab(
                 // SpriteScenePrefab
                 sprite_scene: (
                     // SpriteSheetPrefab with index 0
@@ -48,6 +48,11 @@ Prefab(
                     transform: (
                         translation: (0.0, 0.0, 0.6),
                     ),
+                ),
+                // FallingObject
+                falling_object: (
+                    g: 9.81,
+                    v: [0.0, 0.0],
                 ),
             ),
         ),

@@ -36,7 +36,7 @@ impl SimpleState for Game {
         load_level(&mut world).expect("Encountered an issue when loading the level");
         // Crates new progress counter
         self.progress_counter = Some(Default::default());
-        prefabs::load_throwable(&mut world, self.progress_counter.as_mut().unwrap());
+        prefabs::load_thrown(&mut world, self.progress_counter.as_mut().unwrap());
         prefabs::load_jocrap(&mut world, self.progress_counter.as_mut().unwrap());
         prefabs::load_player(&mut world, self.progress_counter.as_mut().unwrap());
         prefabs::load_background(&mut world, self.progress_counter.as_mut().unwrap());

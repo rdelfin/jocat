@@ -42,6 +42,11 @@ fn main() -> amethyst::Result<()> {
             "player_loader",
             &[],
         )
+        .with_system_desc(
+            PrefabLoaderSystemDesc::<prefabs::ThrownPrefab>::default(),
+            "thrown_loader",
+            &[],
+        )
         .with_bundle(AudioBundle::default())?
         .with_bundle(
             AnimationBundle::<animation::AnimationId, SpriteRender>::new(

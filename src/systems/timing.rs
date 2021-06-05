@@ -1,6 +1,6 @@
 use crate::{
     audio,
-    prefabs::{BackgroundPrefab, ThrowablePrefabSet},
+    prefabs::{ThrownPrefab, ThrownPrefabSet},
     resources::{GameEvent, Level, LevelStart},
 };
 use amethyst::{
@@ -28,8 +28,8 @@ impl<'s> System<'s> for TimingSystem {
         Option<Read<'s, Output>>,
         Option<Read<'s, LevelStart>>,
         ReadExpect<'s, Level>,
-        WriteStorage<'s, Handle<Prefab<BackgroundPrefab>>>,
-        Read<'s, ThrowablePrefabSet>,
+        WriteStorage<'s, Handle<Prefab<ThrownPrefab>>>,
+        Read<'s, ThrownPrefabSet>,
     );
 
     fn run(
@@ -76,8 +76,8 @@ impl TimingSystem {
         audio_output: Option<Read<'s, Output>>,
         level: ReadExpect<'s, Level>,
         entities: Entities<'s>,
-        mut prefabs: WriteStorage<'s, Handle<Prefab<BackgroundPrefab>>>,
-        throwable_prefab_set: Read<'s, ThrowablePrefabSet>,
+        mut prefabs: WriteStorage<'s, Handle<Prefab<ThrownPrefab>>>,
+        throwable_prefab_set: Read<'s, ThrownPrefabSet>,
     ) {
         // Iterate through all events in current beat
         if let Some(events) = level.events.get(&self.beat) {
