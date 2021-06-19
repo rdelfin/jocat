@@ -81,7 +81,7 @@ fn main() -> amethyst::Result<()> {
             &["user_input_system", "timing_system"],
         );
 
-    let mut game = Application::new(assets_dir, state::Game::default(), game_data)?;
+    let mut game = Application::new(assets_dir, state::Loading::default(), game_data)?;
     game.run();
 
     Ok(())
