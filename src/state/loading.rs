@@ -92,6 +92,7 @@ impl SimpleState for Loading {
                         .clone()
                         .expect("Background handle doesn't exist")
                         .clone(),
+                    loaded: false,
                 }));
             } else {
                 let errors = progress_counter.errors();

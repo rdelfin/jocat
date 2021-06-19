@@ -7,7 +7,7 @@ use amethyst::{
     audio::{output::Output, Source},
     ecs::{Entities, Join, Read, ReadExpect, ReadStorage, WriteStorage},
     input::{is_close_requested, is_key_down, VirtualKeyCode},
-    prelude::{Builder, WorldExt},
+    prelude::{Builder, World, WorldExt},
     renderer::sprite::SpriteRender,
     GameData, SimpleState, SimpleTrans, StateData, StateEvent, Trans,
 };
@@ -18,6 +18,7 @@ pub struct Game {
     pub player_handle: Handle<Prefab<prefabs::PlayerPrefab>>,
     pub jocrap_handle: Handle<Prefab<prefabs::PlayerPrefab>>,
     pub background_handle: Handle<Prefab<prefabs::BackgroundPrefab>>,
+    pub loaded: bool,
 }
 
 impl SimpleState for Game {
@@ -47,7 +48,34 @@ impl SimpleState for Game {
 
         // Start the timer
         world.insert(LevelStart(Instant::now()));
+    }
 
+    fn handle_event(
+        &mut self,
+        mut _data: StateData<'_, GameData<'_, '_>>,
+        event: StateEvent,
+    ) -> SimpleTrans {
+        if let StateEvent::Window(event) = &event {
+            if is_close_requested(&event) || is_key_down(&event, VirtualKeyCode::Escape) {
+                return Trans::Quit;
+            }
+        }
+        Trans::None
+    }
+
+    fn update(&mut self, data: &mut StateData<'_, GameData<'_, '_>>) -> SimpleTrans {
+        let StateData { world, .. } = data;
+
+        if !self.loaded {
+            self.setup_animations(world);
+        }
+
+        Trans::None
+    }
+}
+
+impl Game {
+    fn setup_animations(&mut self, world: &mut World) {
         // Start the animations
         world.exec(
             #[allow(clippy::type_complexity)]
@@ -61,6 +89,7 @@ impl SimpleState for Game {
                 for (entity, animation_set, player) in
                     (&entities, &animation_sets, (&players).maybe()).join()
                 {
+                    self.loaded = true;
                     // Creates a new AnimationControlSet for the entity
                     let control_set = get_animation_set(&mut control_sets, entity).unwrap();
 
@@ -96,18 +125,5 @@ impl SimpleState for Game {
                 }
             },
         );
-    }
-
-    fn handle_event(
-        &mut self,
-        mut _data: StateData<'_, GameData<'_, '_>>,
-        event: StateEvent,
-    ) -> SimpleTrans {
-        if let StateEvent::Window(event) = &event {
-            if is_close_requested(&event) || is_key_down(&event, VirtualKeyCode::Escape) {
-                return Trans::Quit;
-            }
-        }
-        Trans::None
     }
 }
