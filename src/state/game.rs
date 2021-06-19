@@ -1,4 +1,10 @@
-use crate::{animation::AnimationId, audio, components::Player, prefabs, resources::LevelStart};
+use crate::{
+    animation::AnimationId,
+    audio,
+    components::{Npc, NpcType, Player},
+    prefabs,
+    resources::LevelStart,
+};
 use amethyst::{
     animation::{
         get_animation_set, AnimationCommand, AnimationControlSet, AnimationSet, EndControl,
@@ -16,7 +22,7 @@ use std::time::Instant;
 
 pub struct Game {
     pub player_handle: Handle<Prefab<prefabs::PlayerPrefab>>,
-    pub jocrap_handle: Handle<Prefab<prefabs::PlayerPrefab>>,
+    pub jocrap_handle: Handle<Prefab<prefabs::NpcPrefab>>,
     pub background_handle: Handle<Prefab<prefabs::BackgroundPrefab>>,
     pub loaded: bool,
 }
@@ -79,47 +85,57 @@ impl Game {
         // Start the animations
         world.exec(
             #[allow(clippy::type_complexity)]
-            |(entities, animation_sets, players, mut control_sets): (
+            |(entities, animation_sets, players, npcs, mut control_sets): (
                 Entities,
                 ReadStorage<AnimationSet<AnimationId, SpriteRender>>,
                 ReadStorage<Player>,
+                ReadStorage<Npc>,
                 WriteStorage<AnimationControlSet<AnimationId, SpriteRender>>,
             )| {
                 // For each entity that has AnimationSet
-                for (entity, animation_set, player) in
-                    (&entities, &animation_sets, (&players).maybe()).join()
+                for (entity, animation_set, player, npc) in (
+                    &entities,
+                    &animation_sets,
+                    (&players).maybe(),
+                    (&npcs).maybe(),
+                )
+                    .join()
                 {
                     self.loaded = true;
                     // Creates a new AnimationControlSet for the entity
                     let control_set = get_animation_set(&mut control_sets, entity).unwrap();
 
-                    match player {
-                        Some(_) => {
-                            info!("Setting animation to idle");
-                            control_set.add_animation(
-                                AnimationId::Attack,
-                                &animation_set.get(&AnimationId::Attack).unwrap(),
-                                EndControl::Stay,
-                                1.0,
-                                AnimationCommand::Init,
-                            );
-                            control_set.add_animation(
-                                AnimationId::Idle,
-                                &animation_set.get(&AnimationId::Idle).unwrap(),
-                                EndControl::Loop(None),
-                                1.0,
-                                AnimationCommand::Start,
-                            );
-                        }
-                        None => {
-                            info!("Setting animation to bop");
-                            control_set.add_animation(
-                                AnimationId::JoCrapBop,
-                                &animation_set.get(&AnimationId::JoCrapBop).unwrap(),
-                                EndControl::Loop(None),
-                                1.0,
-                                AnimationCommand::Start,
-                            );
+                    if let Some(_) = player {
+                        info!("Setting player animation to idle");
+                        control_set.add_animation(
+                            AnimationId::Attack,
+                            &animation_set.get(&AnimationId::Attack).unwrap(),
+                            EndControl::Stay,
+                            1.0,
+                            AnimationCommand::Init,
+                        );
+                        control_set.add_animation(
+                            AnimationId::Idle,
+                            &animation_set.get(&AnimationId::Idle).unwrap(),
+                            EndControl::Loop(None),
+                            1.0,
+                            AnimationCommand::Start,
+                        );
+                    }
+
+                    if let Some(npc) = npc {
+                        match npc.t {
+                            NpcType::JoCrap => {
+                                info!("Setting jocrap animation to bop");
+                                control_set.add_animation(
+                                    AnimationId::JoCrapBop,
+                                    &animation_set.get(&AnimationId::JoCrapBop).unwrap(),
+                                    EndControl::Loop(None),
+                                    1.0,
+                                    AnimationCommand::Start,
+                                );
+                            }
+                            NpcType::Gobo => {}
                         }
                     }
                 }

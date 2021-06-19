@@ -1,4 +1,4 @@
-use crate::{animation::AnimationId, components::Player};
+use crate::{animation::AnimationId, components::Npc};
 use amethyst::{
     animation::AnimationSetPrefab,
     assets::{Handle, Prefab, PrefabData, PrefabLoader, ProgressCounter, RonFormat},
@@ -10,21 +10,26 @@ use amethyst::{
 };
 use serde::Deserialize;
 
-/// Loading data for one entity
 #[derive(Debug, Clone, Deserialize, PrefabData)]
-pub struct PlayerPrefab {
-    /// Information for rendering a scene with sprites
+pub struct NpcPrefab {
     sprite_scene: SpriteScenePrefab,
-    /// Аll animations that can be run on the entity
     animation_set: AnimationSetPrefab<AnimationId, SpriteRender>,
-    player: Option<Player>,
+    npc: Npc,
 }
 
-pub fn load_player(
+pub fn load_jocrap(
     world: &mut World,
     progress_counter: &mut ProgressCounter,
-) -> Handle<Prefab<PlayerPrefab>> {
-    world.exec(|loader: PrefabLoader<'_, PlayerPrefab>| {
-        loader.load("prefabs/player.ron", RonFormat, progress_counter)
+) -> Handle<Prefab<NpcPrefab>> {
+    load_npc_prefab(world, "prefabs/jocrap.ron", progress_counter)
+}
+
+fn load_npc_prefab(
+    world: &mut World,
+    prefab_location: &str,
+    progress_counter: &mut ProgressCounter,
+) -> Handle<Prefab<NpcPrefab>> {
+    world.exec(|loader: PrefabLoader<'_, NpcPrefab>| {
+        loader.load(prefab_location, RonFormat, progress_counter)
     })
 }

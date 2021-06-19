@@ -20,8 +20,9 @@ use std::fs;
 pub struct Loading {
     pub progress_counter: Option<ProgressCounter>,
     pub items_done_last: Option<usize>,
+    pub errors_last: Option<usize>,
     pub player_handle: Option<Handle<Prefab<prefabs::PlayerPrefab>>>,
-    pub jocrap_handle: Option<Handle<Prefab<prefabs::PlayerPrefab>>>,
+    pub jocrap_handle: Option<Handle<Prefab<prefabs::NpcPrefab>>>,
     pub background_handle: Option<Handle<Prefab<prefabs::BackgroundPrefab>>>,
 }
 
@@ -101,19 +102,20 @@ impl SimpleState for Loading {
                 }
 
                 let num_finished = progress_counter.num_finished();
+                let num_errors = progress_counter.num_failed();
                 let print = match self.items_done_last {
                     Some(l) => num_finished != l,
+                    None => true,
+                } || match self.errors_last {
+                    Some(l) => num_errors != l,
                     None => true,
                 };
                 if print {
                     self.items_done_last = Some(num_finished);
+                    self.errors_last = Some(num_errors);
                     let completion_pct =
                         100. * num_finished as f64 / progress_counter.num_assets() as f64;
-                    info!(
-                        "{:.2}% DONE ({} failed)",
-                        completion_pct,
-                        progress_counter.num_failed()
-                    );
+                    info!("{:.2}% DONE ({} failed)", completion_pct, num_errors);
                 }
             }
         }

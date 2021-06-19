@@ -43,6 +43,11 @@ fn main() -> amethyst::Result<()> {
             &[],
         )
         .with_system_desc(
+            PrefabLoaderSystemDesc::<prefabs::NpcPrefab>::default(),
+            "npc_loader",
+            &[],
+        )
+        .with_system_desc(
             PrefabLoaderSystemDesc::<prefabs::ThrownPrefab>::default(),
             "thrown_loader",
             &[],

@@ -3,7 +3,7 @@ Prefab(
     entities: [
         // Grey arrow
         PrefabEntity(
-            data: PlayerPrefab(
+            data: NpcPrefab(
                 // SpriteScenePrefab
                 sprite_scene: (
                     // SpriteSheetPrefab with index 0
@@ -96,6 +96,7 @@ Prefab(
                         ),
                     ],
                 ),
+                npc: (t: JoCrap),
             ),
         ),
     ],
